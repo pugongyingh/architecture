@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Portfolio</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel='stylesheet' href='/css/style.css' />
+<body onload="onload()" style='background-color: <%= color %>'>
+
+  <div class="main">
+    <div class="row">
+      <div id="header" class ='internal_header' style="margin-top: 0px; margin-left: 13px; position:fixed; width:100%;">
+          <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 nav text-left"><a href="../home"><img src='/img/favicon.png' height="50px;" width='50px'/></a></div>
+            <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-center"><a href='/hub'><img src='/img/hub.png' height="50px;" width='50px'/></a><a href='/home'><img src='/img/workspace.png' height="50px;" width='50px'/></a>
+              <img data-toggle="modal" onclick='keepshowing()' data-target="#myModal" src='/img/portfolio.png' height="50px;" width='50px'/></div>
+              <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-right"><img id='search_icon' style='cursor:pointer;' src='/img/search.png' height="60px;" width='60px'/><input type="text" class='white_placeholder'  style="display:none; border: none; background:transparent; height:60px; font-size:20px;" id="search_project" placeholder="Search"/></div>
+                  </div>
+      <div class="text-center" style="border : 1px solid rgba(220,222,224, 0.4); border-top: none; height: 500px; margin-top: 0px;" id="double_header">
+        <img src='<%= portfolio_header %>' height="500px" width="100%"/>
+        <% if (portfolio_header === "") { %>
+            Double Click to upload header for your Portfolio
+        <% } %>
+
+          <input type="hidden" id="email" value="<%= email %>"/>
+
+      </div>
+
+<input type='file' id='profile_image' class="hidden"/>
+
+
+    </div></br></br>
+    <div class="row text-center">
+
+
+
+<input type="color" name="favcolor" id='color' value='<%= color %>' placeholder="Pick a color">
+      <div class="form-group text-center">
+
+    <h3>Projects</h3>
+    </div>
+    </div>
+    <div class="row text-center col-md-10 col-md-offset-1" id="projects_list">
+
+    </div>
+    <div class="modal fade" id="myModal" onclick='notshow();'>
+  <div class="row" style="margin-top: 80px">
+    <div class="col-md-4" >
+  <a href='friends'><img src='/img/add_friend.png' onclick='keepshowing();' height='50px' width='50px'/></a></div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4 text-right">
+  <a href='settings' class="col-md-4 col-md-offset-4"><img src='/img/settings.png' onclick='keepshowing();' height='50px' width='50px'/></a>
+  </div>
+  </div>
+  <div class="row text-center"><h3 style="color: white">Friend Requests</h3></div>
+  <div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8" id='friend_requests'>
+
+  </div>
+  <div class="col-md-2">
+
+  </div>
+  </div>
+    </div>
+  <script type="text/javascript">
+//project_description
+$("#double_header").dblclick(function(){
+  $("#profile_image").click();
+});
+$("#profile_image").change(function(){
+  var profile_image = $('#profile_image').val();
+  var image = $("#profile_image")[0].files[0];
+  var ext = profile_image.split('.').pop().toLowerCase();
+  var image_size = image.size;
+  var formdata = new FormData();
+  if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+      alert('Please make sure that your file is an image with an extension of png, jpg or jpeg');
+  }else if(image_size > 3242880){
+  alert("Please make sure that your image is less than 3 Mb!");
+  }else{
+    formdata.append("image", image);
+    formdata.append("ext", ext);
+    $.ajax({
+           url: 'portfolio/upload_header_image',
+           data: formdata,
+           processData: false,
+      contentType : false,
+           type: 'POST',
+           success: function ( data ) {
+               window.location.reload();
+           }
+       });
+
+  }
+
+
+});
+$(document).on("click", "#search_icon", function(){
+  $("#search_project").css("display", "inline-block");
+  $("#search_icon").css("display", "inline-block");
+});
+$("#search_project").keyup(function(e){
+  var project_name = $("#search_project").val().trim();
+
+  $(".search[id^=search"+project_name+"]").css("display", "block");
+
+  if(project_name != ""){
+    $(".search").find(".search:not([id^=search"+project_name+"])").css("display", "none");
+  }
+});
+$("#color").change(function(){
+  var color =  $("#color").val().trim();
+  $("body").css("background-color", color);
+  $.post("portfolio/portfolio_color",{
+    color: color
+  },function(data){
+    console.log(data);
+  });
+
+});
+function onload(){
+
+    $.get("./portfolio/get_list", function(data){
+      var list = data;
+      for(var i=0; i < list.length; i++){
+        var email = list[i][0];
+        var project_name = list[i][1];
+        var project_description = list[i][2];
+        var header_image = list[i][3];
+        var project_id = list[i][4];
+        var bolean =  false;
+
+        $("#projects_list").append("<div class='search'><div class='search' id='search"+project_name+"' style='padding-top: 100px; width:20%; display:inline-block; float:left;'><div class='text-center'><a href='/show/"+project_id+"/"+email+"'><img class='mousedown' src='"+header_image+"' style='width:80%; height: 200px'></a><div class='caption'><p class='text-center'>"+project_name+"</p><h4>Shared By: "+email+"</h4></div></div></div></div>");
+
+      }
+    })
+}
+
+var timer = null;
+$(document).mousemove(function(){
+
+  $("#header").fadeIn("slow");
+
+  if (timer) {
+       clearTimeout(timer);
+       timer = 0;
+   }
+
+   timer = setTimeout(function() {
+     if($("#search_project").val().trim() === "" ){
+       $('#header').fadeOut("slow")
+     }
+   }, 2000)
+});
+  </script>
+</body>
+</html>

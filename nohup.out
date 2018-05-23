@@ -1,0 +1,104 @@
+Express server listening on port 9000
+[0mGET / [36m304 [0m18.974 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.591 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m0.892 ms - -[0m
+[0mGET /favicon.ico [32m200 [0m2.829 ms - 32244[0m
+[0mGET / [36m304 [0m8.738 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.666 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m0.325 ms - -[0m
+[0mGET /favicon.ico [32m200 [0m1.241 ms - 32244[0m
+waseem477@yahoo.com
+[0mPOST /check_email [32m200 [0m25.627 ms - 4[0m
+waseem477@yahoo.com
+[0mPOST /login [32m200 [0m7.189 ms - 4[0m
+[0mGET /home [32m200 [0m4.191 ms - 11905[0m
+[0mGET /css/style.css [36m304 [0m0.240 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m1.096 ms - -[0m
+[0mGET /img/hub_black.png [32m200 [0m0.962 ms - 134657[0m
+[0mGET /img/workspace.png [32m200 [0m1.486 ms - 58182[0m
+[0mGET /img/search.png [32m200 [0m2.019 ms - 16769[0m
+[0mGET /img/add_friend.png [32m200 [0m2.082 ms - 46170[0m
+[0mGET /img/portfolio_black.png [32m200 [0m2.554 ms - 59227[0m
+[0mGET /img/settings.png [32m200 [0m2.125 ms - 5889[0m
+[0mGET /img/share.png [32m200 [0m2.456 ms - 66654[0m
+[0mGET /img/delete.png [32m200 [0m0.493 ms - 18529[0m
+[0mGET /img/portfolio.png [32m200 [0m1.369 ms - 49954[0m
+[0mGET /img/hub.png [32m200 [0m1.626 ms - 139346[0m
+[0mGET /friends/friend_requests [32m200 [0m8.730 ms - 0[0m
+[0mPOST /home/projects_list [32m200 [0m9.235 ms - 641[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/more/header_image.jpg [32m200 [0m5.586 ms - 7804[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/check/header_image.jpg [32m200 [0m4.431 ms - 8029[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/newadf/header_image.jpg [32m200 [0m4.507 ms - 14278[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/header_/header_image.jpg [32m200 [0m5.165 ms - 15359[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/myanother/header_image.png [32m200 [0m4.662 ms - 279921[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/end/header_image.jpg [32m200 [0m2.701 ms - 14234[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/new/header_image.jpg [32m200 [0m8.260 ms - 775637[0m
+../img/users_directory/waseem477@yahoo.com/more/header_image.jpg
+null
+[0mGET /workspace/more [32m200 [0m20.518 ms - 6782[0m
+[0mGET /css/style.css [36m304 [0m0.541 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m0.419 ms - -[0m
+[0mGET /img/composition.png [32m200 [0m1.075 ms - 94624[0m
+[0mGET /img/search.png [36m304 [0m0.422 ms - -[0m
+[0mGET /img/share.png [36m304 [0m1.459 ms - -[0m
+[0mGET /img/delete.png [36m304 [0m0.397 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/more/header_image.jpg [36m304 [0m0.335 ms - -[0m
+./public/img/users_directory/waseem477@yahoo.com/more
+[0mPOST /project_images [32m200 [0m1.153 ms - 2[0m
+[0mGET /home [36m304 [0m36.667 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.621 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m0.482 ms - -[0m
+[0mGET /img/hub_black.png [36m304 [0m0.404 ms - -[0m
+[0mGET /img/workspace.png [36m304 [0m1.872 ms - -[0m
+[0mGET /img/portfolio_black.png [36m304 [0m0.608 ms - -[0m
+[0mGET /img/search.png [36m304 [0m0.707 ms - -[0m
+[0mGET /img/add_friend.png [36m304 [0m0.324 ms - -[0m
+[0mGET /img/settings.png [36m304 [0m0.247 ms - -[0m
+[0mGET /img/share.png [36m304 [0m0.594 ms - -[0m
+[0mGET /img/delete.png [36m304 [0m0.496 ms - -[0m
+[0mGET /img/hub.png [36m304 [0m0.216 ms - -[0m
+[0mGET /img/portfolio.png [36m304 [0m0.200 ms - -[0m
+[0mPOST /home/projects_list [32m200 [0m5.442 ms - 638[0m
+[0mGET /friends/friend_requests [36m304 [0m7.487 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/more/header_image.jpg [36m304 [0m0.279 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/new/header_image.jpg [36m304 [0m3.072 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/myanother/header_image.png [36m304 [0m1.176 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/check/header_image.jpg [36m304 [0m1.089 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/newadf/header_image.jpg [36m304 [0m1.803 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/header_/header_image.jpg [36m304 [0m2.287 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/end/header_image.jpg [36m304 [0m3.166 ms - -[0m
+../img/users_directory/waseem477@yahoo.com/myanother/header_image.png
+3
+[0mGET /workspace/myanother [32m200 [0m3.499 ms - 6802[0m
+[0mGET /css/style.css [36m304 [0m0.973 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m0.435 ms - -[0m
+[0mGET /img/composition.png [36m304 [0m0.409 ms - -[0m
+[0mGET /img/search.png [36m304 [0m0.195 ms - -[0m
+[0mGET /img/share.png [36m304 [0m0.319 ms - -[0m
+[0mGET /img/delete.png [36m304 [0m0.286 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/myanother/header_image.png [36m304 [0m0.269 ms - -[0m
+./public/img/users_directory/waseem477@yahoo.com/myanother
+[0mPOST /project_images [32m200 [0m0.936 ms - 66[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/myanother/image.jpg [32m200 [0m1.335 ms - 9934[0m
+[0mGET /home [36m304 [0m3.443 ms - -[0m
+[0mGET /css/style.css [36m304 [0m2.455 ms - -[0m
+[0mGET /img/favicon.png [36m304 [0m0.560 ms - -[0m
+[0mGET /img/hub_black.png [36m304 [0m0.519 ms - -[0m
+[0mGET /img/workspace.png [36m304 [0m0.378 ms - -[0m
+[0mGET /img/portfolio_black.png [36m304 [0m1.826 ms - -[0m
+[0mGET /img/search.png [36m304 [0m0.623 ms - -[0m
+[0mGET /img/add_friend.png [36m304 [0m0.309 ms - -[0m
+[0mGET /img/settings.png [36m304 [0m0.498 ms - -[0m
+[0mGET /img/share.png [36m304 [0m0.228 ms - -[0m
+[0mGET /img/delete.png [36m304 [0m0.215 ms - -[0m
+[0mGET /img/hub.png [36m304 [0m0.625 ms - -[0m
+[0mGET /img/portfolio.png [36m304 [0m0.402 ms - -[0m
+[0mPOST /home/projects_list [32m200 [0m6.269 ms - 638[0m
+[0mGET /friends/friend_requests [36m304 [0m8.596 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/new/header_image.jpg [36m304 [0m0.518 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/myanother/header_image.png [36m304 [0m0.241 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/more/header_image.jpg [36m304 [0m0.794 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/check/header_image.jpg [36m304 [0m0.705 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/newadf/header_image.jpg [36m304 [0m0.751 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/header_/header_image.jpg [36m304 [0m1.044 ms - -[0m
+[0mGET /img/users_directory/waseem477@yahoo.com/end/header_image.jpg [36m304 [0m0.509 ms - -[0m

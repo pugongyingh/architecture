@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="http://unpkg.com/css-font-family@1.0.6/css/css-font-family.min.css" />
+<link rel='stylesheet' href='/css/style.css' />
+<style>
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border: none;
+  box-shadow: none;
+  border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+}
+input[type="text"]
+{
+    box-shadow: none;
+    border: none;
+    border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+    background-color: #FAFAFA;
+}
+input[type="password"]
+{
+
+    border: none;
+    border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+    background-color: #FAFAFA;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+</style>
+<script type="text/javascript">
+
+function valid_email(email){
+  var check = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(email.match(check))
+        {
+      return true;
+        }
+      else
+        {
+        return false;
+        }
+}
+
+var user_data = {
+  "email" : "",
+  "full_name" : "",
+  "password" : "",
+  "confirm_password" : ""
+}
+
+function submit_form(){
+  var email = $("#email").val().trim();
+  $("#Next").css("display", "block");
+  //email ID verification
+  if(user_data.email === ""){
+  if(email === "" || valid_email(email) === false){
+    $("#error").html("<em class='text-danger'>Please enter a valid Email ID!</em>");
+    $("#error").css("display", "block");
+  }else{
+    $("#error").empty();
+    $("#error").css("display", "none");
+    $.post("./check_email", {
+      postemail: email
+    },function(data){
+      if(data === true){
+        $("#error").html("<em class='text-danger'>The Email ID already exists!</em>");
+        $("#error").css("display", "block");
+      }else{
+        user_data.email = email;
+        $("#error").css("display", "none");
+        $("#email_tag").css("display", "none");
+        $("#full_name_tag").css("display", "block");
+      }
+    })
+  }
+  // full name
+}else if(user_data.full_name === ""){
+  var full_name = $("#full_name").val().trim();
+  if(full_name === ""){
+    $("#error").html("<em class='text-danger'>Please enter your Full Name!</em>");
+    $("#error").css("display", "block");
+  }else{
+    $("#error").css("display", "none");
+    $("#email_tag").css("display", "none");
+    $("#full_name_tag").css("display", "none");
+    $("#password_tag").css("display", "block");
+    user_data.full_name = full_name;
+  }
+}else if(user_data.password === ""){
+  var password = $("#password").val().trim();
+  if(password === "" || password.length < 5 || password.length > 30){
+    $("#error").html("<em class='text-danger'>Please enter a Password with a length greater than 5.</em>");
+    $("#error").css("display", "block");
+  }else{
+    $("#error").css("display", "none");
+    $("#email_tag").css("display", "none");
+    $("#full_name_tag").css("display", "none");
+    $("#password_tag").css("display", "none");
+    $("#confirm_password_tag").css("display", "block");
+    user_data.password =  password;
+  }
+}else if(user_data.confirm_password === ""){
+  var confirm_password = $("#confirm_password").val().trim();
+  if(confirm_password != user_data.password){
+    $("#error").html("<em class='text-danger'>The passwords don't match!</em>");
+    $("#error").css("display", "block");
+  }else{
+    $("#error").css("display", "none");
+    $("#email_tag").css("display", "none");
+    $("#full_name_tag").css("display", "none");
+    $("#password_tag").css("display", "none");
+    $("#confirm_password_tag").css("display", "none");
+    user_data.confirm_password =  confirm_password;
+    $.ajax({
+      type: "POST",
+      url: "./register_user",
+      // The key needs to match your method's input parameter (case-sensitive).
+      data: user_data,
+      success: function(data){
+          $("#registration_form").css("display", "none");
+          $("#registration_notification").css("display", "block").html("We've sent you an email, please confirm your identity and then <a href=''>Log in!</a>");
+      },
+      failure: function(errMsg) {
+          alert(errMsg);
+      }
+  });
+  }
+}
+
+}
+</script>
+  </head>
+  <body>
+<nav id="header" class="navbar-fixed-top text-center col-md-6" style="margin-top:20px; margin-left: auto;
+  margin-right: auto;
+  float: none;">
+    <div class="col-md-3 col-lg-3 col-xs-3 col-sm-3 nav text-center"><a href="#">Overview</a></div>
+      <div class="col-md-3  col-lg-3 col-xs-3 col-sm-3 nav text-center"><a href="#">Explore</a></div>
+        <div class="col-md-3  col-lg-3 col-xs-3 col-sm-3 nav text-center"><a href="#">News</a></div>
+          <div class="col-md-3  col-lg-3 col-xs-3 col-sm-3 nav text-center"><a href="#">Support</a></div>
+          </nav>
+
+          <div class="text-center">
+
+
+        <form class="col-md-3 col-xs-8 col-lg-3 col-sm-6" id="registration_form" style="display: block; margin-left: auto;
+  margin-right: auto;
+  float: none; margin-top:300px">
+
+          <img src="/img/logo.png" class=".shadowed" style="height:150px; width: 150px;"/>
+        </br></br>
+          <div id='email_tag' style="display:block">
+          <input class="form-control text-center" type="text" id="email" placeholder="Enter your Email ID to Sign In/Up"/>
+          </div>
+          <div id='full_name_tag' style="display:none">
+          <input class="form-control text-center" type="text" id="full_name" placeholder="Enter Your Full Name"/>
+          </div>
+          <div id='password_tag' style="display:none">
+          <input class="form-control text-center" type="password" id="password" placeholder="Enter Your Password"/>
+          </div>
+          <div id='login_password' style="display:none">
+          <input class="form-control text-center" type="password" id="log_password" placeholder="Enter Your Password"/>
+          </div>
+          <div id='confirm_password_tag' style="display:none">
+          <input class="form-control text-center" type="password" id="confirm_password" placeholder="Confirm Your password"/>
+          </div>
+          </br>
+          <div id="error" class="text-center" style="display:none"></div>
+          <h4 class="text-center" style='cursor:pointer; display:none' id="Next" onclick="submit_form()" style="display:none">Next</h4>
+        </form>
+<h3 id="registration_notification" style="margin-top: 300px; display:none"></h3>
+      </div>
+
+    </div>
+    <script type="text/javascript">
+
+    var login_credential = {
+      "email" : "",
+      "password" :""
+    }
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 1000;
+    $('#email').keyup(function(e){
+      clearTimeout(typingTimer);
+      if(e.which === 13){
+        doneTyping();
+      }else{
+      if ($('#email').val()) {
+          typingTimer = setTimeout(doneTyping, doneTypingInterval);
+      }
+    }
+  })
+
+  $('#log_password').keyup(function(e){
+    clearTimeout(typingTimer);
+    if(e.which === 13){
+      doneTyping();
+    }else{
+    if ($('#log_password').val()) {
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    }
+  }
+  })
+  function valid_email(email){
+    var check = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if(email.match(check))
+          {
+        return true;
+          }
+        else
+          {
+          return false;
+          }
+  }
+  function doneTyping () {
+     var email = $("#email").val().trim();
+     if(valid_email(email) === false){
+       $("#error").html("<em class='text-danger'>Enter a Valid Email ID</em>");
+       $("#error").css("display", "block");
+
+     }
+     else if(login_credential.email === ""){
+       $.post("/check_email", {
+         postemail: email
+
+       }, function(data){
+           if(data != true){
+             $("#email_tag").css("display", "none");
+             $("#error").html("<p>Not a user do you want to Sign Up?</p>");
+             $("#error").append("</br><a style='cursor:pointer; font-weight: bolder; font-size: 16px;' onclick='submit_form()'>YES</a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<a href='' style='font-weight: bolder; font-size: 16px;'>NO</a>");
+             $("#error").css("display", "block");
+             $("#header").empty();
+
+           }else{
+             login_credential.email = email;
+             $("#error").css("display", "none");
+             $("#email_tag").css("display", "none");
+             $("#login_password").css("display", "block");
+             $("#log_password").focus();
+             $("#header").empty();
+
+           }
+       })
+     }else{
+       var password = $("#log_password").val().trim();
+
+       login_credential.password = password;
+       $.ajax({
+         type: "POST",
+         url: "./login",
+         // The key needs to match your method's input parameter (case-sensitive).
+         data: login_credential,
+         success: function(data){
+             console.log(login_credential);
+             if(data === false){
+               $("#error").html("<strong class='text-danger'>Incorrect password!</strong></br></br><b>Forgot Password? <a style='cursor:pointer;' onclick='reset();'>Reset</a></b></br>");
+               $("#error").css("display", "block");
+             }else{
+               $("#login_form").css("display", "none");
+               window.location.href = "/home";
+             }
+         },
+         failure: function(errMsg) {
+             alert(errMsg);
+         }
+     });
+     }
+
+    }
+
+    function reset() {
+      $("#error").empty();
+      $("#login_password").css("display", "none");
+      var email = $("#email").val().trim();
+      if(email === ""){
+        $("#error").html("<em class='text-danger'>We couldn't quite capture your email</em>");
+      }else{
+        $.post("/reset_password", {
+          postemail: email
+        }, function(data){
+          if(data === true){
+            $("#error").html("<strong> We have sent you an email that contains a link to reset password</strong>");
+          }else{
+            $("#error").html("<strong class='text-danger'>There was a problem");
+          }
+        })
+      }
+    }
+    </script>
+
+  </body>
+</html>

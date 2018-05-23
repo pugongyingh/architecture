@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<style>
+input[type="text"]
+{
+    box-shadow: none;
+    border: none;
+    border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+    background-color: #FAFAFA;
+}
+input[type="password"]
+{
+  box-shadow: none;
+  border: none;
+  border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+  background-color: #FAFAFA;
+}
+input[type="text"]:focus
+{
+    box-shadow: none;
+    border: none;
+    border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+    background-color: #FAFAFA;
+}
+input[type="password"]:focus
+{
+
+  box-shadow: none;
+  border: none;
+  border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+  background-color: #FAFAFA;
+}
+button[type="button"]{
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+  background-color: #FAFAFA;
+
+}
+.form-control[type="button"]:focus{
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-bottom: 0.666px solid rgba(220,222,224, 0.6);
+  background-color: #FAFAFA;
+}
+
+</style>
+<body>
+  <div id="header" class="row" style="margin-top: 0px; margin-left: 13px">
+      <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 nav text-left"><a href="../home"><img src='/img/favicon.png' height="50px;" width='50px'/></a></div>
+        <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-center"><a href="#"><img src='/img/settings_black.png' height="50px;" width='50px'/></a></div>
+          <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-right"><a href="#" id="search_icon"><img src='/img/search.png' height="50px;" width='50px'/></a><input style="display: none"  class='form-control text-center' type="text" id="search_project" placeholder="Type Project Name and Press Enter"/></div>
+              </div>
+
+              <div class="row" style="margin-top: 150px;">
+                <div class="col-md-4 text-center"></br></br><img  onclick='upload_pic()' style='float:none;  width: 130px; height:100px;'  class='img-circle img-thumbnail' src="<%= profile_image %>" onerror="this.style.borderWidth=0" alt='Click to upload'/></br></br>Profile Picture</div><input type='file' id='profile_image' class="hidden"/>
+                <div class="col-md-4 text-center">
+
+                  <form class="form-group col-md-8 col-md-offset-2 text-center">
+                    <h3>Personal</h3></br></br>
+                    <input type='text' class="form-control" placeholder="Full Name" id='full_name'/></br>
+                    <input type='password' class="form-control" placeholder="Enter New Password" id='password'/></br>
+                    <input type='password' class="form-control" placeholder="Verify New Password" id='verify_password'/></br>
+                    <button type='button' class="btn btn-mute form-control" onclick='save_changes();'><b>Save Changes</b></button></br></br>
+                    <em class="text-danger" id='error_message'></em>
+                  </form>
+                </div>
+                <div class="col-md-4 text-center"><a class='btn btn-muted' href='/logout'>Sign Out</a></div>
+              </div>
+              <script type='text/javascript'>
+              function upload_pic(){
+                $("#profile_image").click();
+              }
+
+              $("#profile_image").change(function(){
+                var profile_image = $('#profile_image').val();
+                var image = $("#profile_image")[0].files[0];
+                var ext = profile_image.split('.').pop().toLowerCase();
+                var image_size = image.size;
+                var formdata = new FormData();
+                if($.inArray(ext, ['png','jpg','jpeg']) == -1) {
+                    alert('Please make sure that your file is an image with an extension of png, jpg or jpeg');
+                }else if(image_size > 3242880){
+                alert("Please make sure that your image is less than 3 Mb!");
+                }else{
+                  formdata.append("image", image);
+                  formdata.append("ext", ext);
+                  $.ajax({
+                         url: 'settings/upload_profile_image',
+                         data: formdata,
+                         processData: false,
+                    contentType : false,
+                         type: 'POST',
+                         success: function ( data ) {
+                             location.reload();
+                         }
+                     });
+
+                }
+
+
+              })
+
+              function save_changes(){
+              var full_name = $("#full_name").val().trim();
+              var password = $("#password").val().trim();
+              var verify_password = $("#verify_password").val().trim();
+
+              if(full_name === "" || password === "" || verify_password === ""){
+                $("#error_message").html("Please Fill in all the fields!");
+              }else if(password != verify_password){
+                $("#error_message").html("Passwords do not match!");
+              }else{
+                $("#error_message").empty();
+                $.post("settings/save_changes", {
+                  postfull_name: full_name,
+                  postpassword: password
+                }, function(data){
+                  if(data === true){
+                  $("#error_message").html("<span style='color: black'>Your changes has been saved!</span>");
+                }else{
+                  $("#error_message").html(data);
+                }
+                })
+              }
+            }
+
+              </script>
+</body>
+</html>

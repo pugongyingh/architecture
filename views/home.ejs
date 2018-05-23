@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel='stylesheet' href='/css/style.css' />
+<style>
+.item img {
+  width: 100%;
+  height: 500px;
+  max-height: 500px;
+}
+#carousel-example-generic{
+  height: 500px;
+}
+#recent_projects{
+  height: 500px;
+}
+#header{
+  position: fixed;
+  z-index: 90;
+
+}
+div.show-image
+  {
+  position: relative;
+  float:left;
+  margin:5px;
+  }
+
+div.show-image:hover .the-buttons
+  {
+  display: block;
+  }
+
+div.show-image .the-buttons
+  {
+  position:relative;;
+  display:none;
+  }
+  input[type="text"]:focus{
+    outline: none;
+    box-shadow: none;
+  }
+  input[type="text"]{
+    outline: none;
+    box-shadow: none;
+    color: #808080;
+  }
+  .white_placeholder::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: white;
+    font-size: 20px;
+  }
+  .white_placeholder::-moz-placeholder { /* Firefox 19+ */
+    color: white;
+    font-size: 20px;
+  }
+  .white_placeholder:-ms-input-placeholder { /* IE 10+ */
+    color: white;
+    font-size: 20px;
+  }
+  .white_placeholder:-moz-placeholder { /* Firefox 18- */
+    color: white;
+
+    font-size: 20px;
+  }
+</style>
+</head>
+<body onload="onload()">
+
+</br></br>
+  <div class="main" style="width: 100%">
+
+    <div class= 'row text-center' id="recent_projects" style="margin-top: -40px; width:100%">
+      <div id="header" class="internal_header" style="width: 100%;  margin-left: 13px;">
+          <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 nav text-left"><a href="#"><a href="#"><img src='/img/favicon.png' height="60px;" width='60px'/></a></div>
+            <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-center"><a href="/hub"><img src='/img/hub.png' height="60px;" width='60px'/></a><img data-toggle="modal" onclick='keepshowing()' data-target="#myModal" src='/img/workspace.png' height="60px;" width='60px'/>
+              <a href="/portfolio"><img src='/img/portfolio.png' height="60px;" width='60px'/></a></div>
+              <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-right"><img id='search_icon' src='/img/search.png' height="60px;" width='60px'/><input type="text" class='white_placeholder'  style="display:none; border: none; background:transparent; height:60px; font-size:20px;" id="search_project" placeholder="Search"/></div>
+                  </div>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style='width: 100%;'>
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators"></ol>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" style="width: 105%"></div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+
+  </a>
+  <a class="right carousel-control" style='margin-right: -15px'; href="#carousel-example-generic" data-slide="next">
+
+  </a>
+</div>
+    </div>
+    <div class="row">
+
+
+
+
+      <div style="border-top: 1px solid rgba(220,222,224, 0.4);"class="form-group text-center">
+</br></br></br></br>
+    <h3 style='cursor:pointer' onclick='show_new_project()'>Projects</h3>
+    </div>
+    </div>
+  </div>
+  <div class="row text-center col-md-10 col-md-offset-1" id="projects_list">
+
+  </div>
+
+  <div class="modal fade" id="myModal" onclick='notshow();'>
+<div class="row" style="margin-top: 80px">
+  <div class="col-md-4" >
+<a href='friends'><img src='/img/add_friend.png' onclick='keepshowing();' height='50px' width='50px'/></a></div>
+<div class="col-md-4"></div>
+<div class="col-md-4 text-right">
+<a href='settings' class="col-md-4 col-md-offset-4"><img src='/img/settings.png' onclick='keepshowing();' height='50px' width='50px'/></a>
+</div>
+</div>
+<div class="row text-center"><h3 style="color: white">Notifications</h3><hr style="width:15%;"></div>
+<div class="row text-center"><h3 style="color: white">Projects</h3><hr style="width:85%;"><div class="row">
+<div class="col-md-2">
+
+</div>
+<div class="col-md-8" id='shared_projects'>
+
+</div>
+<div class="col-md-2">
+
+</div>
+</div></div>
+<div class="row text-center"><h3 style="color: white">Friend Requests</h3><hr style="width:85%;">
+  <div class="row">
+  <div class="col-md-2">
+
+  </div>
+  <div class="col-md-8" id='friend_requests'>
+
+  </div>
+  <div class="col-md-2">
+
+  </div>
+  </div></div>
+
+  </div>
+<input id="mousedown_project_name" type='hidden'/>
+  <div class="modal fade" id="share_delete_modal" onclick='notshow();'>
+
+<div class="col-md-2 text-center"><a href='#'><img style='margin-top: 80px; margin-left: 30px;' onclick = 'show_options();'src='/img/share.png' height='50px' width='50px'/></a></div>
+<div class="col-md-8 text-center"></div>
+<div class="col-md-2 text-center"><a href='#'><img style='margin-top: 80px; margin-left: 30px;' onclick = 'delete_project();' src='/img/delete.png' height='50px' width='50px'/></a></div>
+<div class="row text-center"><h3 style='color:white;' id='number_likes'>Likes</h3>
+<div class='col-md-9 text-center' id='list_likes'></div></div>
+
+
+  </div>
+
+  <div class="modal fade" id="share_modal" onclick='notshow();'>
+<div class="row text-center" style='margin-top: 80px; color: white;'><h3 id='share_to_heading' style='cursor: pointer; display:block;' onclick='show_search_box();'>Share To</h3><div style='display:none' id='search_box'><i onclick='cross_search()' class="fa fa-times-circle-o" style="font-size:36px; color:white"></i><img src='/img/search.png' height="60px;" width='60px'/>
+  <input type="text" id='share_to_friend' class='white_placeholder'  style="display:inline-block; border: none; background:transparent; font-size:20px; color:white;" placeholder="Search"/></div>
+  </div>
+<div class="col-md-5 text-center"></div>
+<div class="col-md-2 text-center"><a href='#'><img style='margin-top: 80px; margin-left: 30px;' src='/img/hub.png' onclick='share_to_hub()' height='50px' width='50px'/></a>
+  <a href='#'><img style='margin-top: 80px; margin-left: 30px;' src='/img/portfolio.png' onclick='share_to_portfolio();' height='50px' width='50px'/></a></div>
+<div class="col-md-5 text-center"></div>
+
+  </div>
+
+
+  <script type="text/javascript">
+  function notshow(){
+    $(".modal-dialog").css("width", "0%");
+  }
+  function keepshowing(){
+    $(".modal-dialog").css("width", "100%");
+  }
+function show_search_box(){
+  $("#search_box").css("display", "inline-block");
+  $("#share_to_heading").css("display", "none");
+}
+function cross_search(){
+  $("#search_box").css("display", "none");
+  $("#share_to_heading").css("display", "inline-block");
+}
+function valid_email(email){
+  var check = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if(email.match(check))
+        {
+      return true;
+        }
+      else
+        {
+        return false;
+        }
+}
+var typingTimer;                //timer identifier
+var doneTypingInterval = 2000;
+
+$('#share_to_friend').keyup(function(e){
+  clearTimeout(typingTimer);
+  if(e.which === 13){
+    doneTyping();
+  }else{
+  if ($('#share_to_friend').val().trim() != "") {
+
+      typingTimer = setTimeout(doneTyping, doneTypingInterval);
+  }
+}
+});
+function doneTyping(){
+var friend_email = $("#share_to_friend").val().trim();
+var project_name = $("#mousedown_project_name").val().trim();
+
+if(valid_email(friend_email) === false){
+  alert("Invalid Email ID");
+}else{
+  $.post("/check_email", {
+    postemail: friend_email
+
+  }, function(data){
+      if(data != true){
+        alert("The email ID doesn't exist!");
+      }else{
+        $.post("home/share_to_friend",{
+          friend_email : friend_email,
+          project_name : project_name
+
+        }, function(data){
+          alert(data);
+        })
+      }
+    })
+}
+}
+  $(document).on("click", "#search_icon", function(){
+    $("#search_project").css("display", "inline-block");
+    $("#search_icon").css("display", "inline-block");
+  });
+  $("#search_project").keyup(function(e){
+    var project_name = $("#search_project").val().trim();
+
+    $(".search[id^=search"+project_name+"]").css("display", "block");
+
+    if(project_name != ""){
+      $(".search").find(".search:not([id^=search"+project_name+"])").css("display", "none");
+    }
+
+    if(e.which === 13){
+      if(project_name === ""){
+        alert("Your field is empty!")
+      }else{
+        $.post("home", {
+          postproject_name : project_name,
+          postenter: false
+        }, function(data){
+           if(data === false){
+
+             window.location.href = "/workspace/"+project_name;
+           }else{
+             alert("The project doesn't exist!");
+           }
+        })
+      }
+    }
+  })
+
+  $(document).on("click", ".the-buttons", function(e){
+    var type = $(this).attr("value").trim();
+    var request_from  = $(this).attr("request_from").trim();
+    var from_name = $(this).attr("from_name").trim();
+    var profile_image = $(this).attr("profile_image").trim();
+
+    console.log(type, request_from, from_name, profile_image);
+
+    $.post("./friends/accept_reject_friend", {
+      posttype: type,
+      postrequest_from : request_from,
+      postfrom_name : from_name,
+      postprofile_image: profile_image
+    },function(data){
+      window.location.reload();
+    })
+  })
+function onload(){
+  $.get("./friends/friend_requests", function(data){
+    console.log(data.length);
+    for(var i=0; i < data.length; i++){
+      var from_name = data[i][0];
+      var request_from = data[i][1];
+      var profile_image = data[i][2];
+      console.log(profile_image);
+
+      $("#friend_requests").append("<div class='col-md-3 col-md-offset-1 show-image'><img style='float:none;  width: 130px; height:100px;'  class='img-circle img-thumbnail'  src='"+profile_image+"'></br><h4 style='color: white'><button class='btn btn-success the-buttons' type='button' value='accept' request_from='"+request_from+"' from_name='"+from_name+"' profile_image='"+profile_image+"'>Accept</button><button class='btn btn-danger the-buttons' type='button' value='reject' request_from='"+request_from+"' from_name='"+from_name+"' profile_image='"+profile_image+"'>Reject</button>"+from_name+"</h4></div>")
+    }
+  });
+
+  $.get("home/shared_projects", function(data){
+    console.log(data.length);
+    for(var i=0; i < data.length; i++){
+      var project_id = data[i][0];
+      var shared_by = data[i][1];
+      var header_image = data[i][2];
+      var project_name = data[i][3];
+      console.log(data);
+
+      $("#shared_projects").append("<div class='col-md-3 col-md-offset-1 show-image'><a href='/show/"+project_id+"/"+shared_by+"'><img style='float:none;  width: 130px; height:100px;' src='"+header_image+"'/></a></br><h4 style='color: white'>"+project_name+"</h4><h4 style='color: white'>Shared By:"+shared_by+"</h4></div>");
+    }
+  });
+
+
+  $.post("./home/projects_list",{
+    postname: "name"
+  },function(data){
+      var bolean =  false;
+    for(var i=0; i < data.length; i++){
+      if(data[i][3] === 1 || data[i][3] === 4 || data[i][3] === 2 || data[i][3] === 3 || data[i][3] === 5){
+        $("<div class='item'><a href='/workspace/"+data[i][4]+"'><img src='"+data[i][2]+"'><div class='carousel-caption'></div>   </div>").appendTo('.carousel-inner');
+     $('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators');
+
+
+
+        bolean = true;
+     }
+
+
+       $("#projects_list").append("<div class='search'><div class='search' style='padding-top: 100px; width:20%; display:inline-block; float:left;' id='search"+data[i][0]+"'><div class='text-center'><a href='/workspace/"+data[i][4]+"'><img class='mousedown' src='"+data[i][2]+"' project_id='"+data[i][4]+"' value='"+data[i][0]+"' style='width:80%; height: 150px' alt='No Header Image of this Project'></a><div class='caption'><input class='change_name text-center' project_id='"+data[i][4]+"' type='text' style='border:none; outline:none;' value='"+data[i][0]+"'/></div></div></div></div>");
+
+
+
+
+   }
+
+   $("#projects_list").append("<div  onclick = 'click_and_go()' style='cursor: pointer; height: 200px; padding-top: 100px; padding-left: 40px; width:20%; display:inline-block; float:left;' id ='area' ><div id='double_click' style='display: none; border: 1px solid rgba(220,222,224, 0.6); width: 90%; height: 150px'></br></br></br></br></br></br></br></br><input type='text' id='project_name' class='form-control text-center' style='background: #FAFAFA; outline: none; border: none;' placeholder='Name'/></div></div>");
+   if(bolean === false){
+     $("#recent_projects").empty().html("<div id='header' class='internal_header' style='width: 100%;  margin-left: 13px;'><div class='col-md-4 col-lg-4 col-xs-4 col-sm-4 nav text-left'><a href='#'><a href='#'><img src='/img/favicon.png' height='60px;'width='60px'/></a></div><div class='col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-center'><a href='/hub'><img src='/img/hub.png' height='60px;' width='60px'/></a><img data-toggle='modal' onclick='keepshowing()' data-target='#myModal' src='/img/workspace.png' height='60px;' width='60px'/><a href='/portfolio'><img src='/img/portfolio.png' height='60px;' width='60px'/></a></div><div class='col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-right'><img id='search_icon' src='/img/search.png' height='60px;' width='60px'/><input type='text' class='white_placeholder'  style='display:none; border: none; background:transparent; height:60px; font-size:20px;' id='search_project' placeholder='Search'/></div></div><h3 style='margin-top: 250px; color: #C0C0C0'>No recent projects</h3>");
+   }else{
+     $('.item').first().addClass('active');
+     $('.carousel-indicators > li').first().addClass('active');
+     $('#carousel-example-generic').carousel();
+   }
+  })
+
+
+}
+
+
+function show_new_project(){
+$("#double_click").css("display", " block");
+}
+
+var timeoutId = 0;
+$(document).on("mousedown", ".mousedown", function(e){
+  var project_name = $(this).attr("value").trim();
+  var project_id = $(this).attr("project_id").trim();
+  project_id = Number(project_id);
+  $.post("home/list_likes", {
+    project_id: project_id
+  },function(data){
+    console.log(data);
+    $("#number_likes").html(" Likes : "+data.length);
+    $("#list_likes").empty();
+    for(var i=0; i < data.length; i++){
+      var liked_by = data[i][0];
+      var profile_image = data[i][1];
+      $("#list_likes").append("<div class='col-md-3 col-md-offset-1 show-image'><img style='float:none;  width: 130px; height:100px;'  class='img-circle img-thumbnail'  src='"+profile_image+"'></br><h4 style='color: white'>"+liked_by+"</h4></div>");
+    }
+  })
+  $("#mousedown_project_name").val(project_name);
+  timeoutId = setTimeout(function(){
+    $('#share_delete_modal').modal('show');
+  }, 1000);
+
+});
+$(document).on("keyup", ".change_name", function(e){
+  var project_id = $(this).attr("project_id").trim();
+  var project_name = $(this).val().trim();
+  if(project_name != ""){
+    $.post("home/change_name", {
+      project_id: project_id,
+      project_name: project_name
+    }, function(data){
+      console.log(data);
+    })
+  }
+})
+function delete_project(){
+  var project_name = $("#mousedown_project_name").val().trim();
+  $.post("delete_project", {
+    postproject_name : project_name
+  }, function(data){
+    window.location.reload();
+  });
+}
+
+function share_to_hub(){
+  var project_name = $("#mousedown_project_name").val().trim();
+  $.post("share_to_hub", {
+    postproject_name : project_name
+  }, function(data){
+    alert(data);
+  });
+}
+
+function share_to_portfolio(){
+  var project_name = $("#mousedown_project_name").val().trim();
+  $.post("share_to_portfolio", {
+    postproject_name : project_name
+  }, function(data){
+    alert(data);
+  });
+}
+
+
+function show_options(){
+  $('#share_delete_modal').modal('hide');
+  $('#share_modal').modal('show');
+}
+
+$(document).on("keyup", "#project_name", function (e) {
+  var project_name = $("#project_name").val().trim();
+  if(e.which === 13){
+    if(project_name === ""){
+      alert("Please enter your Project Name!");
+
+    }else{
+      console.log(project_name);
+      $.post("home", {
+        postproject_name : project_name,
+        postenter : true
+      }, function(data){
+         if(data != false){
+           window.location.href = "/workspace/"+data.trim();
+         }else{
+           alert("The project Name already exists. Please choose a different name!");
+         }
+      })
+    }
+  }
+
+  });
+
+function click_and_go(){
+  var project_name = $("#project_name").val().trim();
+  if(project_name != ""){
+
+    console.log(project_name);
+    $.post("home", {
+      postproject_name : project_name,
+      postenter : true
+    }, function(data){
+       if(data != false){
+         window.location.href = "/workspace/"+data.trim();
+       }else{
+         alert("The project Name already exists. Please choose a different name!");
+       }
+    })
+  }
+}
+
+
+
+var timer = null;
+$(document).mousemove(function(){
+
+  $("#header").fadeIn("slow");
+
+  if (timer) {
+       clearTimeout(timer);
+       timer = 0;
+   }
+
+   timer = setTimeout(function() {
+     if($("#search_project").val().trim() === "" ){
+       $('#header').fadeOut("slow")
+     }
+   }, 2000)
+});
+  </script>
+</body>

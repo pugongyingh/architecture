@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel='stylesheet' href='/css/style.css' />
+<style>
+.item img {
+  width: 100%;
+  height: 500px;
+  max-height: 500px;
+}
+#carousel-example-generic{
+  height: 500px;
+}
+#recent_projects{
+  height: 500px;
+}
+#header{
+  position: fixed;
+  z-index: 90;
+
+}
+div.show-image
+  {
+  position: relative;
+  float:left;
+  margin:5px;
+  }
+
+div.show-image:hover .the-buttons
+  {
+  display: block;
+  }
+
+div.show-image .the-buttons
+  {
+  position:relative;;
+  display:none;
+  }
+</style>
+</head>
+<body onload='load();'>
+  </br></br>
+  <div class= 'row text-center' id="recent_projects" style="margin-top: -40px; width:100%">
+    <div id="header" class="internal_header" style="width: 100%;  margin-left: 13px;">
+        <div class="col-md-4 col-lg-4 col-xs-4 col-sm-4 nav text-left"><a href="#"><a href="#"><img src='/img/favicon.png' height="60px;" width='60px'/></a></div>
+          <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-center"><img data-toggle="modal" onclick='keepshowing()' data-target="#myModal" src='/img/hub.png' height="50px;" width='50px'/><a href='/home'><img src='/img/workspace.png' height="60px;" width='60px'/></a>
+            <a href='/portfolio'><img src='/img/portfolio.png' height="60px;" width='60px'/></a></div>
+            <div class="col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-right"><img id='search_icon' style='cursor:pointer;' src='/img/search.png' height="60px;" width='60px'/><input type="text" class='white_placeholder'  style="display:none; border: none; background:transparent; height:60px; font-size:20px;" id="search_project" placeholder="Search"/></div>
+                </div>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style='width: 100%;'>
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators"></ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" style="width: 120%"></div>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+
+            </a>
+            <a class="right carousel-control" style='margin-right: -20px;' href="#carousel-example-generic" data-slide="next">
+
+            </a>
+            </div>
+  </div>
+  <div class="row">
+
+
+
+
+    <div style="border-top: 1px solid rgba(220,222,224, 0.4);"class="form-group text-center">
+
+  <h3>Projects</h3>
+  </div>
+  </div>
+  <div class="row text-center col-md-10 col-md-offset-1" id="projects_list">
+
+  </div>
+
+  <div class="modal fade" id="myModal" onclick='notshow();'>
+<div class="row" style="margin-top: 80px">
+  <div class="col-md-4" >
+<a href='friends'><img src='/img/add_friend.png' onclick='keepshowing();' height='50px' width='50px'/></a></div>
+<div class="col-md-4"></div>
+<div class="col-md-4 text-right">
+<a href='settings' class="col-md-4 col-md-offset-4"><img src='/img/settings.png' onclick='keepshowing();' height='50px' width='50px'/></a>
+</div>
+</div>
+<div class="row text-center"><h3 style="color: white">Friend Requests</h3></div>
+<div class="row">
+<div class="col-md-2">
+
+</div>
+<div class="col-md-8" id='friend_requests'>
+
+</div>
+<div class="col-md-2">
+
+</div>
+</div>
+  </div>
+<script type='text/javascript'>
+function notshow(){
+  $(".modal-dialog").css("width", "0%");
+}
+function keepshowing(){
+  $(".modal-dialog").css("width", "100%");
+}
+
+function load(){
+  $.get("./hub/get_list", function(data){
+    var list = data;
+    console.log(list);
+    for(var i=0; i < list.length; i++){
+      var email = list[i][0];
+      var project_name = list[i][1];
+      var project_description = list[i][2];
+      var header_image = list[i][3];
+      var project_id = list[i][4];
+      var liked_status = list[i][5];
+      var bolean =  false;
+      if(i < 5){
+      $("<div class='item'><a href='/show/"+project_id+"/"+email+"'><img src='"+header_image+"'><div class='carousel-caption'></div></div>").appendTo('.carousel-inner');
+   $('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>').appendTo('.carousel-indicators');
+   bolean = true;
+}
+      if(liked_status === "no"){
+      $("#projects_list").append("<div class='search'><div class='search' id='search"+project_name+"' style='padding-top: 100px; width:20%; display:inline-block; float:left;'><div class='text-center'><a href='/show/"+project_id+"/"+email+"'><img class='mousedown' src='"+header_image+"' style='width:80%; height: 200px'></a><i class='fa fa-heart-o' project_id='"+project_id+"' owner_of_the_project='"+email+"' style='font-size:20px; color:red; position:absolute; margin-top:180px;'></i><div class='caption'><p class='text-center'>"+project_name+"</p><h4>Shared By: "+email+"</h4></div></div></div></div>");
+    }else{
+
+      $("#projects_list").append("<div class='search'><div class='search' id='search"+project_name+"' style='padding-top: 100px; width:20%; display:inline-block; float:left;'><div class='text-center'><a href='/show/"+project_id+"/"+email+"'><img class='mousedown' src='"+header_image+"' style='width:80%; height: 200px'></a><i class='fa fa-heart' project_id='"+project_id+"' owner_of_the_project='"+email+"' style='font-size:20px; color:red; position:absolute; margin-top:180px;'></i><div class='caption'><p class='text-center'>"+project_name+"</p><h4>Shared By: "+email+"</h4></div></div></div></div>");
+
+    }
+
+    }
+    if(bolean === false){
+      $("#recent_projects").empty().html("<div id='header' class='col-md-off'style='width: 100%;  margin-left: 14px;'><div class='col-md-4 col-lg-4 col-xs-4 col-sm-4 nav text-left'><a href='#'><a href='#'><img src='/img/favicon.png' height='50px;' width='50px'/></a></div><div class='col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-center'><a href='#'><a href='#'><img src='/img/workspace.png' height='50px;' width='50px'/></a></div><div class='col-md-4  col-lg-4 col-xs-4 col-sm-4 nav text-right'><a href='#' id='search_icon'><img src='/img/search.png' height='50px;' width='50px'/></a><input style='display: none'  class='form-control text-center' type='text' id='search_project' placeholder='Type Project Name and Press Enter'/></div></div><h3 style='margin-top: 250px; color: #C0C0C0'>No Shared projects</h3>");
+    }else{
+      $('.item').first().addClass('active');
+      $('.carousel-indicators > li').first().addClass('active');
+      $('#carousel-example-generic').carousel();
+    }
+
+  })
+}
+
+var timer = null;
+$(document).mousemove(function(){
+
+  $("#header").fadeIn("slow");
+
+  if (timer) {
+       clearTimeout(timer);
+       timer = 0;
+   }
+
+   timer = setTimeout(function() {
+     if($("#search_project").val().trim() === "" ){
+       $('#header').fadeOut("slow")
+     }
+   }, 2000)
+});
+
+$(document).on("click", "#search_icon", function(){
+  $("#search_project").css("display", "inline-block");
+  $("#search_icon").css("display", "inline-block");
+});
+
+$("#search_project").keyup(function(e){
+  var project_name = $("#search_project").val().trim();
+
+  $(".search[id^=search"+project_name+"]").css("display", "block");
+
+  if(project_name != ""){
+    $(".search").find(".search:not([id^=search"+project_name+"])").css("display", "none");
+  }
+});
+
+$(document).on("click", ".fa-heart, .fa-heart-o", function(e){
+  $(this).toggleClass("fa-heart fa-heart-o");
+  var type = $(this).attr("class").trim();
+  if(type === "fa fa-heart"){
+    type = "like";
+  }else{
+    type = "unlike";
+  }
+  var project_id = $(this).attr("project_id").trim();
+  var owner_of_the_project = $(this).attr("owner_of_the_project").trim();
+  console.log(type, project_id);
+  $.post("hub/likes", {
+    type: type,
+    project_id: project_id,
+    owner_of_the_project: owner_of_the_project
+  }, function(data){
+     console.log(data);
+  })
+
+
+
+});
+</script>
+</body>

@@ -1,0 +1,53 @@
+body {
+  background-color: #FAFAFA;
+  height: 0.40%;
+}
+html,body
+{
+  
+    overflow-x: hidden;
+}
+.navbar {
+  background: none;
+}
+a, a:hover{
+  color: black;
+  font-family: avenir, 'avenir next', helvetica, arial, sans-serif;
+}
+.text-muted{
+  color: #FAFAFA;
+}
+h1, h2, h3, h4, h5, h6, a, p, em, strong{
+  font-family: avenir, 'avenir next', helvetica, arial, sans-serif;
+}
+.internal_header {
+     /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(rgba(128,128,128,0.4), rgba(255,255,255,0)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(rgba(128,128,128,0.4), rgba(255,255,255,0)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(rgba(128,128,128,0.4), rgba(255,255,255,0)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(rgba(128,128,128,0.4), rgba(255,255,255,0)); /* Standard syntax */
+
+
+
+}
+textarea:focus{
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+textarea{
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+input[type="text"]:focus{
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
+input[type="text"]{
+  border:none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+}
